@@ -98,8 +98,8 @@ const deleteCalendar = async (req, res) => {
       message: `Calendar with ID ${calendarId} successfully deleted`,
     });
   } catch (error) {
-    console.error("Error deleting calendar:", error);
-    return res.status(500).json({ message: "Error deleting calendar." });
+    console.error("Error deleting calendar item:", error);
+    return res.status(500).json({ message: "Error deleting calendar item." });
   }
 };
 
