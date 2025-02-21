@@ -10,7 +10,7 @@ const getBudget = async (req, res) => {
       "category",
       "amount",
       "expense",
-      "month" // Added month field
+      "month"
     );
 
     res.status(200).json(budgets);
@@ -23,7 +23,7 @@ const getBudget = async (req, res) => {
 const findBudget = async (req, res) => {
   try {
     const budgetFound = await knex("budget")
-      .select("id", "category", "amount", "expense", "month") // Added month field
+      .select("id", "category", "amount", "expense", "month")
       .where({
         id: req.params.id,
       })
@@ -48,7 +48,6 @@ const addBudget = async (req, res) => {
   const { category, amount, expense, month } = req.body;
 
   if (!category || !amount || !expense || !month) {
-    // Ensure month is included
     return res
       .status(400)
       .json("Error adding budget: Missing required properties");
@@ -59,11 +58,11 @@ const addBudget = async (req, res) => {
       category,
       amount,
       expense,
-      month, // Insert month field
+      month,
     });
 
     const newBudget = await knex("budget")
-      .select("id", "category", "amount", "expense", "month") // Include month in response
+      .select("id", "category", "amount", "expense", "month")
       .where({ id: newBudgetId[0] })
       .first();
 
